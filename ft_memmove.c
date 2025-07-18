@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 11:12:39 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/17 11:40:49 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/07/18 10:50:10 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	}
 	else
 	{
-		while (i++ < len)
-			tmp_dst[i] = tmp_src[i];
+		while (count++ < len)
+			tmp_dst[count] = tmp_src[count];
 	}
 	return (dst);
 }
