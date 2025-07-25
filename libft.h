@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:48:45 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/25 09:45:22 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/07/25 10:17:01 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stddef.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 int		ft_atoi(const char *str);
 int		ft_isalpha(int c);
