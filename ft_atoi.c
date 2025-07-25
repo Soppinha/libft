@@ -19,7 +19,7 @@ int	ft_atoi(const char *str)
 		sign *= -1;
 		i++;
 	}
-	while (str[i] && str[i] >= '0' &&  str[i] <= '9')
+	while (str[i] && str[i] >= '0' && str[i] <= '9')
 	{
 		sum_result = (sum_result * 10) + (str[i] - '0');
 		i++;
