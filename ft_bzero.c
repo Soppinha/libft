@@ -6,11 +6,11 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 11:05:11 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/17 11:05:14 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/07/31 09:30:34 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

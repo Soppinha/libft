@@ -6,11 +6,11 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 09:42:57 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/25 10:44:36 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/07/31 09:30:27 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {
