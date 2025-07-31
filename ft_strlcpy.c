@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 10:52:02 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/31 09:31:54 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/07/31 11:26:46 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int	src_len;
+	size_t	src_len;
 
 	src_len = ft_strlen(src);
 	if (dstsize > src_len + 1)

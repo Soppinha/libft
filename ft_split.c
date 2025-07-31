@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 13:44:05 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/31 09:31:38 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/07/31 12:20:43 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static size_t	ft_count_words(const char *s, char c)
 	int		n_word;
 	size_t	i;
 
+	n_word = 0;
+	i = 0;
 	while (*s)
 	{
 		if (*s != c && n_word == 0)
@@ -28,9 +30,9 @@ static size_t	ft_count_words(const char *s, char c)
 			n_word = 0;
 		s++;
 	}
-		return (n_word);
+	return (i);
 }
-	
+
 static void	*ft_free(char **ss)
 {
 	size_t	i;
@@ -42,31 +44,49 @@ static void	*ft_free(char **ss)
 	return (NULL);
 }
 
+static char	*ft_fill_word(const char *s, int start, int end)
+{
+	char	*word;
+	int		i;
+
+	i = 0;
+	if (!s || start < 0 || end <= start)
+		return (NULL);
+	word = (char *)malloc(sizeof(char) * (end - start + 1));
+	if (!word)
+		return (NULL);
+	while (start < end)
+		word[i++] = s[start++];
+	word[i] = '\0';
+	return (word);
+}
+
 char	**ft_split(char const *s, char c)
 {
-	char	**res;
-	int	start;
-	int	end;
+	char	**ss;
 	size_t	i;
+	size_t	len;
 
-	if (!s || !(res = ft_calloc(sizeof(char *), ft_count_words(s, c) + 1)))
+	ss = (char **)ft_calloc(ft_count_words(s, c) + 1, sizeof(char *));
+	if (!s || !ss)
 		return (NULL);
-	start = 0;
-	end = 0;
 	i = 0;
-	while (s[end])
+	while (*s)
 	{
-		while (s[end] == c)
-			end++;
-		start = end;
-		while (s[end] && s[end] != c)
-			end++;
-		if (end > start)
+		while (*s == c)
+			s++;
+		if (*s)
 		{
-			res[i] = ft_substr(s, start, end - start);
-			if (!res[i++])
-				return (ft_free(res), NULL);
+			if (ft_strchr(s, c))
+				len = ft_strchr(s, c) - s;
+			else
+				len = ft_strlen(s);
+			ss[i++] = ft_fill_word(s, 0, len);
+			if (!ss[i - 1])
+				return (ft_free(ss));
+			s += len;
 		}
 	}
-	return (res);
+	return (ss);
 }
+

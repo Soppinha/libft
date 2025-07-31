@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 11:12:39 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/31 09:31:31 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/07/31 11:24:52 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 	if (!src && !dst)
 		return ((void *) 0);
-	tmp_dst == (char *) dst;
-	tmp_src == (char *) src;
+	tmp_dst = (char *) dst;
+	tmp_src = (char *) src;
 	count = 0;
 	if (tmp_dst > tmp_src)
 	{

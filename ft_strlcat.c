@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 12:16:37 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/31 09:31:51 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/07/31 11:25:49 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	int	dst_len;
-	int	src_len;
+	size_t	dst_len;
+	size_t	src_len;
 
 	dst_len = ft_strlen(dst);
 	src_len = ft_strlen(src);

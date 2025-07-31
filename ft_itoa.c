@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 09:40:54 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/31 10:23:02 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/07/31 11:24:11 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ static int	intlen(int n)
 
 char	*ft_itoa(int n)
 {
-	int				i;
 	int				len;
 	char			*str_result;
 	unsigned int	num;
 
 	len = intlen(n + 1);
-	*str_result = ft_calloc(sizeof(char), len + 1);
+	str_result = ft_calloc(sizeof(char), len + 1);
 	if (!str_result)
 		return (NULL);
 	str_result[len] = '\0';
