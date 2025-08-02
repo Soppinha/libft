@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 09:40:46 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/31 09:30:37 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/07/31 15:29:46 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,20 @@ void	*ft_calloc(size_t count, size_t size)
 	unsigned char	*temp;
 	size_t			i;
 
-	i = 0;
+	if (count == 0 || size == 0)
+	{
+		temp = malloc(1);
+		if (!temp)
+			return (NULL);
+		return (temp);
+	}
+	if (size != 0 && size > ((size_t)-1) / count)
+		return (NULL);
 	temp = malloc(count * size);
 	if (!temp)
 		return (NULL);
-	while (i < (count * size))
+	i = 0;
+	while (i < count * size)
 		temp[i++] = 0;
 	return (temp);
 }

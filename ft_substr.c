@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 10:51:44 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/31 09:32:14 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/07/31 15:20:42 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (len > ft_strlen(s + start))
 		len = ft_strlen(s + start);
 	new_str = ft_calloc((len + 1), sizeof(char));
+	if (!new_str)
+		return (NULL);
 	i = 0;
 	while (i < len && s[start + i])
 	{

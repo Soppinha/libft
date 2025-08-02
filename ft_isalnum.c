@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:44:46 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/31 09:30:40 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/07/31 12:41:17 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	ft_isalnum(int c)
 {
-	if (ft_isdigit(c) && ft_isalpha(c))
-	{
-		return (1);
-	}
+	if (ft_isalpha(c) || ft_isdigit(c))
+		return (c);
 	return (0);
 }

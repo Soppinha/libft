@@ -6,13 +6,13 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 09:40:54 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/31 11:24:11 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/07/31 15:08:26 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	intlen(int n)
+static int	ft_intlen(int n)
 {
 	int	count;
 
@@ -29,28 +29,29 @@ static int	intlen(int n)
 
 char	*ft_itoa(int n)
 {
-	int				len;
-	char			*str_result;
+	char			*str;
 	unsigned int	num;
+	int				len;
 
-	len = intlen(n + 1);
-	str_result = ft_calloc(sizeof(char), len + 1);
-	if (!str_result)
-		return (NULL);
-	str_result[len] = '\0';
+	len = ft_intlen(n);
+	num = n;
 	if (n < 0)
-		num = -n;
-	else
-		num = n;
-	while (len--)
 	{
-		str_result[len] = (num % 10) + '0';
-		num /= 10;
-		if (num == 0 && n < 0 && len == 1)
-		{
-			str_result[0] = '-';
-			break ;
-		}
+		num = -n;
+		len++;
 	}
-	return (str_result);
+	str = ft_calloc(len + 1, sizeof(char));
+	if (!str)
+		return (NULL);
+	str[len] = '\0';
+	if (n == 0)
+		str[0] = '0';
+	while (num)
+	{
+		str[--len] = (num % 10) + '0';
+		num /= 10;
+	}
+	if (n < 0)
+		str[0] = '-';
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 13:44:05 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/31 12:20:43 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/07/31 12:41:44 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,3 @@ char	**ft_split(char const *s, char c)
 	}
 	return (ss);
 }
-
