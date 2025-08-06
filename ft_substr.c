@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 10:51:44 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/31 15:20:42 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/08/06 16:27:59 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		new_str[i] = s[start + i];
 		i++;
 	}
-	new_str[i] = '\0';
 	return (new_str);
 }

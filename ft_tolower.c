@@ -6,15 +6,13 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 16:09:33 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/19 16:10:47 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/08/06 16:28:37 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
-	{
 		return (c + ' ');
-	}
 	return (c);
 }

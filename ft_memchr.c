@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 12:01:08 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/31 09:31:17 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/08/06 16:02:01 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	unsigned char	*str;
 	unsigned char	charac;
 
+	if (s == NULL)
+		return (NULL);
 	i = 0;
 	str = (unsigned char *) s;
 	charac = (unsigned char) c;

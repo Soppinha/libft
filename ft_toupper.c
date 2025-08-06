@@ -6,15 +6,13 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 16:01:36 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/19 16:06:56 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/08/06 16:28:41 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
-	{
 		return (c - ' ');
-	}
 	return (c);
 }

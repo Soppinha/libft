@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 11:39:06 by svaladar          #+#    #+#             */
-/*   Updated: 2025/08/02 11:45:09 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/08/06 16:30:41 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_lstsize(t_list *lst)
 	while (lst)
 	{
 		i++;
-		lst = lst -> next;
+		lst = lst->next;
 	}
 	return (i);
 }

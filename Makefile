@@ -35,39 +35,45 @@ SRCS	=	ft_isalpha.c		\
 			ft_putchar_fd.c		\
 			ft_putstr_fd.c		\
 			ft_putendl_fd.c		\
-			ft_putnbr_fd.c		\
-			ft_lstnew.c			\
-			ft_lstadd_front.c	\
-			ft_lstsize.c		\
-			ft_lstlast.c		\
-			ft_lstadd_back.c	\
-			ft_lstdelone.c		\
-			ft_lstclear.c		\
-			ft_lstiter.c		\
-			ft_lstmap.c			\
+			ft_putnbr_fd.c		
+
+SRCS_B	= 	ft_lstadd_back_bonus.c	\
+			ft_lstadd_front_bonus.c	\
+			ft_lstclear_bonus.c		\
+			ft_lstdelone_bonus.c	\
+			ft_lstiter_bonus.c		\
+			ft_lstlast_bonus.c		\
+			ft_lstmap_bonus.c		\
+			ft_lstnew_bonus.c		
 
 INCLUDES=	./
 
-OBJS	=	${SRCS:.c=.o}
+OBJS	=	${SRCS:%.c=obj/%.o}
+OBJS_B	=	${SRCS_B:%.c=obj/%.o}
 
 CFLAGS	= -Wall -Wextra -Werror
-RM		= rm -f
+RM		= rm -rf
 
 all: ${OBJS} ${NAME}
+bonus: ${OBJS} ${OBJS_B} ${NAME}
+	@ar rc ${NAME} ${OBJS_B}
 
-%.o: %.c
-	${CC} ${CFLAGS} -I${INCLUDES} -c $< -o $@
-	ar rc ${NAME} $@
+obj/%.o: %.c
+	@mkdir -p obj
+	@printf "\033[1;32mCompiling \033[1;34m$<\033[0m\n"
+	@${CC} ${CFLAGS} -I${INCLUDES} -c $< -o $@
+	@sleep 0.1
 
 ${NAME}:
-	ar rc ${NAME} ${OBJS}
+	@ar rc ${NAME} ${OBJS}
+	@printf "\033[1;34mlibft: done\033[0m\n"
 
 clean:
-	${RM} ${OBJS} ${B_OBJS}
+	@${RM} obj
 
 fclean: clean
-	${RM} ${NAME}
+	@${RM} ${NAME} ${NAME_B}
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

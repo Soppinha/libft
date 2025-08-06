@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 09:40:54 by svaladar          #+#    #+#             */
-/*   Updated: 2025/07/31 15:08:26 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/08/06 16:10:35 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char	*ft_itoa(int n)
 	str = ft_calloc(len + 1, sizeof(char));
 	if (!str)
 		return (NULL);
-	str[len] = '\0';
 	if (n == 0)
 		str[0] = '0';
 	while (num)
