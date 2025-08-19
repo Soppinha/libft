@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 16:11:30 by svaladar          #+#    #+#             */
-/*   Updated: 2025/08/06 12:37:38 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:43:33 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ char	*ft_strchr(const char *s, int c)
 
 	i = 0;
 	chr = (char) c;
-	if (!s)
-		return (NULL);
 	while (s[i])
 	{
 		if (s[i] == chr)

@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 13:44:05 by svaladar          #+#    #+#             */
-/*   Updated: 2025/08/06 13:04:35 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:35:53 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ char	**ft_split(char const *s, char c)
 	size_t	i;
 	size_t	len;
 
+	ss = (char **)ft_calloc(ft_count_words(s, c) + 1, sizeof(char *));
 	if (!s || !ss)
 		return (NULL);
-	ss = (char **)ft_calloc(ft_count_words(s, c) + 1, sizeof(char *));
 	i = 0;
 	while (*s)
 	{

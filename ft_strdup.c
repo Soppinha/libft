@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 09:58:51 by svaladar          #+#    #+#             */
-/*   Updated: 2025/08/06 12:38:01 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:44:00 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*ft_strdup(const char *s1)
 	char	*temp;
 	size_t	i;
 
-	if (!s1)
-		return (NULL);
 	temp = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
 	if (!temp)
 		return (NULL);

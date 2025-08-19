@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 11:22:28 by svaladar          #+#    #+#             */
-/*   Updated: 2025/08/06 11:56:10 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:09:34 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (!s || fd < 0)
+	if (!s)
 		return ;
 	write(fd, s, ft_strlen(s));
 }

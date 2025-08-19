@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:21:40 by svaladar          #+#    #+#             */
-/*   Updated: 2025/08/06 16:21:56 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:41:04 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
-	if (!s)
-		return (0);
 	i = 0;
 	while (s[i] != '\0')
 		i++;

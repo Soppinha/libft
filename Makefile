@@ -2,8 +2,8 @@ NAME    =   libft.a
 CC      =   cc
 CFLAGS  =   -Wall -Wextra -Werror
 RM      =   rm -rf
-OBJDIR  =   obj
 INCLUDES=   ./
+
 SRCS    =   ft_isalpha.c            \
             ft_isdigit.c            \
             ft_isalnum.c            \
@@ -38,6 +38,7 @@ SRCS    =   ft_isalpha.c            \
             ft_putstr_fd.c          \
             ft_putendl_fd.c         \
             ft_putnbr_fd.c          \
+
 SRCS_B  =   ft_lstadd_back_bonus.c  \
             ft_lstadd_front_bonus.c \
             ft_lstclear_bonus.c     \
@@ -47,8 +48,9 @@ SRCS_B  =   ft_lstadd_back_bonus.c  \
             ft_lstmap_bonus.c       \
             ft_lstnew_bonus.c       \
             ft_lstsize_bonus.c
-OBJS    =   $(SRCS:%.c=$(OBJDIR)/%.o)
-OBJS_B  =   $(SRCS_B:%.c=$(OBJDIR)/%.o)
+
+OBJS    =   $(SRCS:%.c=%.o)
+OBJS_B  =   $(SRCS_B:%.c=%.o)
 
 all:        ${NAME}
 
@@ -60,13 +62,12 @@ bonus: $(OBJS) $(OBJS_B)
 	@ar rc $(NAME) $(OBJS) $(OBJS_B)
 	@printf "\033[1;35mlibft bonus: done\033[0m\n"
 
-$(OBJDIR)/%.o: %.c
-	@mkdir -p $(OBJDIR)
+%.o: %.c
 	@printf "\033[1;32mCompiling \033[1;34m$<\033[0m\n"
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
 
 clean:
-	@${RM} $(OBJDIR)
+	@${RM} ${OBJS} ${OBJS_B}
 
 fclean: clean
 	@${RM} ${NAME}
