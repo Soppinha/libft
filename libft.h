@@ -6,16 +6,21 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 13:48:45 by svaladar          #+#    #+#             */
-/*   Updated: 2025/09/03 17:25:01 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/12/21 20:37:59 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
 
 int		ft_atoi(const char *str);
 int		ft_isalpha(int c);
@@ -73,5 +78,22 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
+
+int		ft_printf(const char *format, ...);
+int		ft_parse_format(const char *format, va_list args);
+int		ft_print_char(int c);
+int		ft_print_str(char *str);
+int		ft_print_ptr(unsigned long ptr);
+int		ft_print_nbr(int n);
+int		ft_print_usg(unsigned int n);
+int		ft_print_hex(unsigned int n, int uppercase);
+int		ft_print_per(void);
+
+char	*get_next_line(int fd);
+size_t	ft_gnl_strlen(const char *s);
+char	*ft_gnl_strchr(const char *s, int c);
+char	*ft_gnl_strjoin(char *s1, char *s2);
+char	*ft_extract_line(char *stash);
+char	*ft_update_stash(char *stash);
 
 #endif

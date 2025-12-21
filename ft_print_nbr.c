@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 14:21:07 by svaladar          #+#    #+#             */
-/*   Updated: 2025/12/21 20:31:00 by svaladar         ###   ########.fr       */
+/*   Created: 2025/10/01 16:02:50 by svaladar          #+#    #+#             */
+/*   Updated: 2025/12/21 20:35:11 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+static int	ft_numlen(int n)
 {
-	size_t	i;
-	size_t	j;
+	int	len;
 
-	if (little[0] == '\0')
-		return ((char *) big);
-	i = 0;
-	while (i < len && big[i])
+	len = 0;
+	if (n <= 0)
+		len = 1;
+	while (n != 0)
 	{
-		j = 0;
-		while (big[i + j] && little[j]
-			&& i + j < len && big[i + j] == little[j])
-			j++;
-		if (!little[j])
-			return ((char *) big + i);
-		i++;
+		n /= 10;
+		len++;
 	}
-	return (NULL);
+	return (len);
+}
+
+int	ft_print_nbr(int n)
+{
+	int	len;
+
+	len = ft_numlen(n);
+	ft_putnbr_fd(n, 1);
+	return (len);
 }

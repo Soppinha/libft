@@ -6,7 +6,7 @@
 /*   By: svaladar <svaladar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 09:40:46 by svaladar          #+#    #+#             */
-/*   Updated: 2025/08/06 12:31:24 by svaladar         ###   ########.fr       */
+/*   Updated: 2025/12/21 20:42:28 by svaladar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,8 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t			i;
 
 	if (count == 0 || size == 0)
-	{
-		temp = malloc(0);
-		if (!temp)
-			return (NULL);
-		return (temp);
-	}
-	if (size != 0 && size > ((size_t)-1) / count)
+		return (malloc(1));
+	if (size > ((size_t)-1) / count)
 		return (NULL);
 	temp = malloc(count * size);
 	if (!temp)
