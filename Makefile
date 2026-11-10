@@ -22,12 +22,15 @@ SRC_DIR		=	src
 OBJ_DIR		=	obj
 
 PRINTF_DIR	=	$(SRC_DIR)/ft_printf
-PRINTF_LIB	=	$(PRINTF_DIR)/libftprintf.a
-PRINTF_DEPS	=	$(wildcard $(PRINTF_DIR)/src/*.c $(PRINTF_DIR)/include/*.h)
+PRINTF		=	ft_printf.o ft_parse_format.o ft_parse_spec.o \
+				ft_print_char.o ft_print_str.o ft_print_ptr.o \
+				ft_print_per.o ft_print_nbr.o ft_print_usg.o \
+				ft_print_hex.o ft_print_utils.o ft_pf_libc.o
+PRINTF_OBJS	=	$(addprefix $(PRINTF_DIR)/obj/, $(PRINTF))
 
 GNL_DIR		=	$(SRC_DIR)/gnl
-GNL_STAMP	=	$(GNL_DIR)/obj/get_next_line_bonus.o
-GNL_DEPS	=	$(wildcard $(GNL_DIR)/src/*_bonus.c $(GNL_DIR)/include/*_bonus.h)
+GNL			=	get_next_line_bonus.o get_next_line_utils_bonus.o
+GNL_OBJS	=	$(addprefix $(GNL_DIR)/obj/, $(GNL))
 
 CTYPE		=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 				ft_isprint.c ft_toupper.c ft_tolower.c
@@ -62,19 +65,21 @@ OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS) $(PRINTF_LIB) $(GNL_STAMP)
-	@ar rcs $(NAME) $(OBJS) $(PRINTF_DIR)/obj/*.o $(GNL_DIR)/obj/*_bonus.o
+$(NAME):	$(OBJS) $(PRINTF_OBJS) $(GNL_OBJS)
+	@ar rcs $(NAME) $(OBJS) $(PRINTF_OBJS) $(GNL_OBJS)
 	@$(LOG) "$(C_DONE)" archived "$(NAME)"
 
-$(PRINTF_LIB):	$(PRINTF_DEPS)
+$(PRINTF_OBJS) &:	FORCE
 	@if [ ! -f $(PRINTF_DIR)/Makefile ]; then \
 		git submodule update --init $(PRINTF_DIR); fi
 	@$(SUBMAKE) $(PRINTF_DIR)
 
-$(GNL_STAMP):	$(GNL_DEPS)
+$(GNL_OBJS) &:	FORCE
 	@if [ ! -f $(GNL_DIR)/Makefile ]; then \
 		git submodule update --init $(GNL_DIR); fi
-	@$(SUBMAKE) $(GNL_DIR) bonus
+	@$(SUBMAKE) $(GNL_DIR) $(addprefix obj/, $(GNL))
+
+FORCE:
 
 bonus:		all
 
@@ -97,4 +102,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all bonus clean fclean re
+.PHONY:		all bonus clean fclean re FORCE
