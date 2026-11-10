@@ -17,26 +17,25 @@ long	ft_atol(const char *str)
 	long	result;
 	int		sign;
 	int		i;
+	int		digit;
 
 	result = 0;
 	sign = 1;
 	i = 0;
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
+	if (str[i] == '-')
+		sign = -1;
 	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
 		i++;
-	}
 	while (ft_isdigit(str[i]))
 	{
-		result = result * 10 + (str[i] - '0');
-		if (result > 2147483648 && sign == -1)
-			return (LONG_MIN);
-		if (result > 2147483647 && sign == 1)
+		digit = str[i++] - '0';
+		if (sign == 1 && result > (LONG_MAX - digit) / 10)
 			return (LONG_MAX);
-		i++;
+		if (sign == -1 && result < (LONG_MIN + digit) / 10)
+			return (LONG_MIN);
+		result = result * 10 + digit * sign;
 	}
-	return (result * sign);
+	return (result);
 }

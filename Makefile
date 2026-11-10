@@ -1,89 +1,70 @@
-NAME    =   libft.a
-CC      =   cc
-CFLAGS  =   -Wall -Wextra -Werror
-RM      =   rm -rf
-INCLUDES=   ./
+NAME		=	libft.a
+CC			=	cc
+CFLAGS		=	-Wall -Wextra -Werror
+INCLUDES	=	-Iinclude
+RM			=	rm -rf
 
-SRCS    =   ft_isalpha.c            \
-            ft_isdigit.c            \
-            ft_isalnum.c            \
-            ft_isascii.c            \
-            ft_isprint.c            \
-            ft_strlen.c             \
-            ft_memset.c             \
-            ft_bzero.c              \
-            ft_memcpy.c             \
-            ft_memmove.c            \
-            ft_strlcpy.c            \
-            ft_strlcat.c            \
-            ft_toupper.c            \
-            ft_tolower.c            \
-            ft_strchr.c             \
-            ft_strrchr.c            \
-            ft_strcmp.c             \
-            ft_strncmp.c            \
-            ft_memchr.c             \
-            ft_memcmp.c             \
-            ft_strnstr.c            \
-            ft_atoi.c               \
-            ft_calloc.c             \
-            ft_strdup.c             \
-            ft_substr.c             \
-            ft_strjoin.c            \
-            ft_strtrim.c            \
-            ft_split.c              \
-            ft_itoa.c               \
-            ft_strmapi.c            \
-            ft_striteri.c           \
-            ft_putchar_fd.c         \
-            ft_putstr_fd.c          \
-            ft_putendl_fd.c         \
-            ft_putnbr_fd.c          \
-            ft_printf.c             \
-            ft_parse_format.c       \
-            ft_print_char.c         \
-            ft_print_str.c          \
-            ft_print_ptr.c          \
-            ft_print_per.c          \
-            ft_print_nbr.c          \
-            ft_print_usg.c          \
-            ft_print_hex.c          \
-            get_next_line.c         \
-            get_next_line_utils.c
+SRC_DIR		=	src
+OBJ_DIR		=	obj
 
-SRCS_B  =   ft_lstadd_back_bonus.c  \
-            ft_lstadd_front_bonus.c \
-            ft_lstclear_bonus.c     \
-            ft_lstdelone_bonus.c    \
-            ft_lstiter_bonus.c      \
-            ft_lstlast_bonus.c      \
-            ft_lstmap_bonus.c       \
-            ft_lstnew_bonus.c       \
-            ft_lstsize_bonus.c
+CTYPE		=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
+				ft_isprint.c ft_toupper.c ft_tolower.c
 
-OBJS    =   $(SRCS:%.c=%.o)
-OBJS_B  =   $(SRCS_B:%.c=%.o)
+MEM			=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
+				ft_memchr.c ft_memcmp.c ft_calloc.c
 
-all:        ${NAME}
+STR			=	ft_strlen.c ft_strlcpy.c ft_strlcat.c ft_strchr.c \
+				ft_strrchr.c ft_strcmp.c ft_strncmp.c ft_strnstr.c \
+				ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c \
+				ft_split.c ft_strmapi.c ft_striteri.c \
+				ft_strjoin3.c ft_free_array.c
 
-${NAME}: ${OBJS}
-	@ar rc ${NAME} ${OBJS}
+CONV		=	ft_atoi.c ft_atol.c ft_itoa.c
+
+PUT			=	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
+
+LST			=	ft_lstnew_bonus.c ft_lstadd_front_bonus.c \
+				ft_lstadd_back_bonus.c ft_lstsize_bonus.c \
+				ft_lstlast_bonus.c ft_lstdelone_bonus.c \
+				ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c \
+				ft_lst_to_array.c
+
+PRINTF		=	ft_printf.c ft_parse_format.c ft_print_char.c \
+				ft_print_str.c ft_print_ptr.c ft_print_per.c \
+				ft_print_nbr.c ft_print_usg.c ft_print_hex.c
+
+GNL			=	get_next_line.c get_next_line_utils.c ft_gnl_trim.c
+
+SRCS		=	$(addprefix $(SRC_DIR)/ctype/, $(CTYPE)) \
+				$(addprefix $(SRC_DIR)/mem/, $(MEM)) \
+				$(addprefix $(SRC_DIR)/str/, $(STR)) \
+				$(addprefix $(SRC_DIR)/conv/, $(CONV)) \
+				$(addprefix $(SRC_DIR)/put/, $(PUT)) \
+				$(addprefix $(SRC_DIR)/lst/, $(LST)) \
+				$(addprefix $(SRC_DIR)/printf/, $(PRINTF)) \
+				$(addprefix $(SRC_DIR)/gnl/, $(GNL))
+
+OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+all:		$(NAME)
+
+$(NAME):	$(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 	@printf "\033[1;34mlibft: done\033[0m\n"
 
-bonus: $(OBJS) $(OBJS_B)
-	@ar rc $(NAME) $(OBJS) $(OBJS_B)
-	@printf "\033[1;35mlibft bonus: done\033[0m\n"
+bonus:		all
 
-%.o: %.c
+$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c include/libft.h
+	@mkdir -p $(dir $@)
 	@printf "\033[1;32mCompiling \033[1;34m$<\033[0m\n"
-	@$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	@${RM} ${OBJS} ${OBJS_B}
+	@$(RM) $(OBJ_DIR)
 
-fclean: clean
-	@${RM} ${NAME}
+fclean:		clean
+	@$(RM) $(NAME)
 
-re: fclean all
+re:			fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY:		all bonus clean fclean re

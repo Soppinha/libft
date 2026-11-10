@@ -50,6 +50,7 @@ char	*ft_itoa(int n);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin3(char const *s1, char const *s2, char const *s3);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strrchr(const char *s, int c);
@@ -63,6 +64,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memset(void *b, int c, size_t len);
 
 char	**ft_split(char const *s, char c);
+void	ft_free_array(char **arr);
 
 typedef struct s_list
 {
@@ -75,6 +77,7 @@ t_list	*ft_lstnew(void *content);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 int		ft_lstsize(t_list *lst);
+void	**ft_lst_to_array(t_list *lst);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
@@ -92,6 +95,7 @@ int		ft_print_hex(unsigned int n, int uppercase);
 int		ft_print_per(void);
 
 char	*get_next_line(int fd);
+char	*ft_gnl_trim(int fd);
 size_t	ft_gnl_strlen(const char *s);
 char	*ft_gnl_strchr(const char *s, int c);
 char	*ft_gnl_strjoin(char *s1, char *s2);
