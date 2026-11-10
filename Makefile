@@ -7,11 +7,11 @@ RM			=	rm -rf
 SRC_DIR		=	src
 OBJ_DIR		=	obj
 
-PRINTF_DIR	=	ft_printf
+PRINTF_DIR	=	$(SRC_DIR)/ft_printf
 PRINTF_LIB	=	$(PRINTF_DIR)/libftprintf.a
 PRINTF_DEPS	=	$(wildcard $(PRINTF_DIR)/src/*.c $(PRINTF_DIR)/include/*.h)
 
-GNL_DIR		=	gnl
+GNL_DIR		=	$(SRC_DIR)/gnl
 GNL_STAMP	=	$(GNL_DIR)/obj/get_next_line_bonus.o
 GNL_DEPS	=	$(wildcard $(GNL_DIR)/src/*_bonus.c $(GNL_DIR)/include/*_bonus.h)
 
@@ -25,7 +25,7 @@ STR			=	ft_strlen.c ft_strlcpy.c ft_strlcat.c ft_strchr.c \
 				ft_strrchr.c ft_strcmp.c ft_strncmp.c ft_strnstr.c \
 				ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c \
 				ft_split.c ft_strmapi.c ft_striteri.c \
-				ft_strjoin3.c ft_free_array.c
+				ft_strjoin3.c ft_free_array.c ft_gnl_trim.c
 
 CONV		=	ft_atoi.c ft_atol.c ft_itoa.c
 
@@ -37,15 +37,12 @@ LST			=	ft_lstnew_bonus.c ft_lstadd_front_bonus.c \
 				ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c \
 				ft_lst_to_array.c
 
-GNL			=	ft_gnl_trim.c
-
 SRCS		=	$(addprefix $(SRC_DIR)/ctype/, $(CTYPE)) \
 				$(addprefix $(SRC_DIR)/mem/, $(MEM)) \
 				$(addprefix $(SRC_DIR)/str/, $(STR)) \
 				$(addprefix $(SRC_DIR)/conv/, $(CONV)) \
 				$(addprefix $(SRC_DIR)/put/, $(PUT)) \
-				$(addprefix $(SRC_DIR)/lst/, $(LST)) \
-				$(addprefix $(SRC_DIR)/gnl/, $(GNL))
+				$(addprefix $(SRC_DIR)/lst/, $(LST))
 
 OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

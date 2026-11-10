@@ -28,15 +28,14 @@ libft/
 ├── include/
 │   └── libft.h
 ├── src/
-│   ├── ctype/    # classificação e conversão de caracteres
-│   ├── mem/      # manipulação de memória
-│   ├── str/      # manipulação de strings
-│   ├── conv/     # conversões numéricas
-│   ├── put/      # escrita em file descriptors
-│   ├── lst/      # listas encadeadas (bônus)
-│   └── gnl/      # ft_gnl_trim
-├── ft_printf/    # submódulo: github.com/Soppinha/ft_printf
-├── gnl/          # submódulo: github.com/Soppinha/GNL
+│   ├── ctype/       # classificação e conversão de caracteres
+│   ├── mem/         # manipulação de memória
+│   ├── str/         # manipulação de strings (inclui ft_gnl_trim)
+│   ├── conv/        # conversões numéricas
+│   ├── put/         # escrita em file descriptors
+│   ├── lst/         # listas encadeadas (bônus)
+│   ├── ft_printf/   # submódulo: github.com/Soppinha/ft_printf
+│   └── gnl/         # submódulo: github.com/Soppinha/GNL
 └── Makefile
 ```
 
@@ -80,6 +79,7 @@ libft/
 | `ft_split` | Divide string por delimitador |
 | `ft_strmapi` / `ft_striteri` | Aplica função a cada caractere |
 | `ft_free_array` | Libera um array de strings |
+| `ft_gnl_trim` | Lê a próxima linha com `get_next_line` e remove o `\n` final |
 
 ### `conv/`
 | Função | Descrição |
@@ -107,11 +107,11 @@ libft/
 | `ft_lstiter` / `ft_lstmap` | Itera / mapeia a lista |
 | `ft_lst_to_array` | Converte a lista em array |
 
-### `ft_printf/` — ft_printf (submódulo)
+### `src/ft_printf/` — ft_printf (submódulo)
 Reimplementação do `printf` com as conversões `%c`, `%s`, `%p`, `%d`, `%i`, `%u`, `%x`, `%X` e `%%` e as flags `-0.# +` com largura e precisão. Vive no seu próprio repositório, [ft_printf](https://github.com/Soppinha/ft_printf), e entra na `libft` como submódulo: o `make` compila o ft_printf e junta seus objetos em `libft.a`, então basta incluir `libft.h`.
 
-### `gnl/` — get_next_line (submódulo)
-Lê um arquivo linha por linha a partir de um file descriptor. Vive no seu próprio repositório, [GNL](https://github.com/Soppinha/GNL), e entra na `libft` como submódulo usando a **versão bônus**, que lê vários file descriptors ao mesmo tempo. Em `src/gnl/` fica o `ft_gnl_trim`, um utilitário extra que devolve a linha sem o `\n` final.
+### `src/gnl/` — get_next_line (submódulo)
+Lê um arquivo linha por linha a partir de um file descriptor. Vive no seu próprio repositório, [GNL](https://github.com/Soppinha/GNL), e entra na `libft` como submódulo usando a **versão bônus**, que lê vários file descriptors ao mesmo tempo. O utilitário `ft_gnl_trim`, que devolve a linha sem o `\n` final, fica em `src/str/`.
 
 ## 🛠️ Compilação
 

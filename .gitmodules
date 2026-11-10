@@ -1,6 +1,6 @@
 [submodule "ft_printf"]
-	path = ft_printf
+	path = src/ft_printf
 	url = https://github.com/Soppinha/ft_printf.git
 [submodule "gnl"]
-	path = gnl
+	path = src/gnl
 	url = https://github.com/Soppinha/GNL.git
