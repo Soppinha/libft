@@ -4,6 +4,20 @@ CFLAGS		=	-Wall -Wextra -Werror
 INCLUDES	=	-Iinclude
 RM			=	rm -rf
 
+# ********************************* OUTPUT ********************************** #
+
+TAG			=	libft
+RESET		=	\033[0m
+C_TAG		=	\033[1;34m
+C_BUILD		=	\033[0;32m
+C_DONE		=	\033[1;32m
+C_CLEAN		=	\033[0;33m
+C_RM		=	\033[0;31m
+LOG			=	printf "$(C_TAG)%-12s$(RESET) %b%-10s$(RESET) %s\n" "[$(TAG)]"
+SUBMAKE		=	$(MAKE) -s --no-print-directory -C
+
+# ********************************** BUILD ********************************** #
+
 SRC_DIR		=	src
 OBJ_DIR		=	obj
 
@@ -50,34 +64,36 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS) $(PRINTF_LIB) $(GNL_STAMP)
 	@ar rcs $(NAME) $(OBJS) $(PRINTF_DIR)/obj/*.o $(GNL_DIR)/obj/*_bonus.o
-	@printf "\033[1;34mlibft: done\033[0m\n"
+	@$(LOG) "$(C_DONE)" archived "$(NAME)"
 
 $(PRINTF_LIB):	$(PRINTF_DEPS)
 	@if [ ! -f $(PRINTF_DIR)/Makefile ]; then \
 		git submodule update --init $(PRINTF_DIR); fi
-	@$(MAKE) -s -C $(PRINTF_DIR)
+	@$(SUBMAKE) $(PRINTF_DIR)
 
 $(GNL_STAMP):	$(GNL_DEPS)
 	@if [ ! -f $(GNL_DIR)/Makefile ]; then \
 		git submodule update --init $(GNL_DIR); fi
-	@$(MAKE) -s -C $(GNL_DIR) bonus > /dev/null
+	@$(SUBMAKE) $(GNL_DIR) bonus
 
 bonus:		all
 
 $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c include/libft.h
 	@mkdir -p $(dir $@)
-	@printf "\033[1;32mCompiling \033[1;34m$<\033[0m\n"
+	@$(LOG) "$(C_BUILD)" compiling "$<"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJ_DIR)
-	@if [ -f $(PRINTF_DIR)/Makefile ]; then $(MAKE) -s -C $(PRINTF_DIR) clean; fi
-	@if [ -f $(GNL_DIR)/Makefile ]; then $(MAKE) -s -C $(GNL_DIR) clean > /dev/null; fi
+	@$(LOG) "$(C_CLEAN)" cleaned objects
+	@if [ -f $(PRINTF_DIR)/Makefile ]; then $(SUBMAKE) $(PRINTF_DIR) clean; fi
+	@if [ -f $(GNL_DIR)/Makefile ]; then $(SUBMAKE) $(GNL_DIR) clean; fi
 
 fclean:		clean
 	@$(RM) $(NAME)
-	@if [ -f $(PRINTF_DIR)/Makefile ]; then $(MAKE) -s -C $(PRINTF_DIR) fclean; fi
-	@if [ -f $(GNL_DIR)/Makefile ]; then $(MAKE) -s -C $(GNL_DIR) fclean > /dev/null; fi
+	@$(LOG) "$(C_RM)" removed "$(NAME)"
+	@if [ -f $(PRINTF_DIR)/Makefile ]; then $(SUBMAKE) $(PRINTF_DIR) fclean; fi
+	@if [ -f $(GNL_DIR)/Makefile ]; then $(SUBMAKE) $(GNL_DIR) fclean; fi
 
 re:			fclean all
 

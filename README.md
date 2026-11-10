@@ -1,153 +1,188 @@
+*This project has been created as part of the 42 curriculum by svaladar.*
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/ayogun/42-project-badges/main/badges/libftm.png" alt="libft badge"/>
+  <img src="https://raw.githubusercontent.com/ayogun/42-project-badges/main/badges/ft_printfm.png" alt="ft_printf badge"/>
+  <img src="https://raw.githubusercontent.com/ayogun/42-project-badges/main/badges/get_next_linem.png" alt="get_next_line badge"/>
 </p>
 
-<h1 align="center">libft</h1>
+# libft
 
-<p align="center">
-  <b><i>Minha própria biblioteca de funções em C — projeto da 42 São Paulo.</i></b>
-</p>
+## Description
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ayogun/42-project-badges/main/badges/ft_printfm.png" alt="ft_printf badge" height="100"/>
-  <img src="https://raw.githubusercontent.com/ayogun/42-project-badges/main/badges/get_next_linem.png" alt="get_next_line badge" height="100"/>
-</p>
+`libft` is the first project of the 42 Common Core: a static C library that reimplements part of the `libc` and adds utility functions. Later projects reuse it, so it grows with the curriculum.
 
----
+This version also bundles two other 42 projects as **git submodules**, so one `libft.a` and one `#include "libft.h"` give you everything:
 
-## 📖 Sobre
+- [**ft_printf**](https://github.com/Soppinha/ft_printf): `printf` with `%c %s %p %d %i %u %x %X %%` and the `-0.# +` flags, width and precision.
+- [**get_next_line**](https://github.com/Soppinha/GNL): reads a file descriptor one line at a time. The bonus version is used, so it can read from several file descriptors at once.
 
-A **libft** é o primeiro projeto do Common Core da 42. O objetivo é reimplementar funções da `libc` e criar funções utilitárias extras que serão reaproveitadas nos próximos projetos.
-
-Esta versão também incorpora o **ft_printf** e o **get_next_line**, além de algumas funções adicionais criadas ao longo do curso.
-
-## 📁 Estrutura
+### Structure
 
 ```
 libft/
 ├── include/
-│   └── libft.h
+│   └── libft.h      # every public prototype, including ft_printf and get_next_line
 ├── src/
-│   ├── ctype/       # classificação e conversão de caracteres
-│   ├── mem/         # manipulação de memória
-│   ├── str/         # manipulação de strings (inclui ft_gnl_trim)
-│   ├── conv/        # conversões numéricas
-│   ├── put/         # escrita em file descriptors
-│   ├── lst/         # listas encadeadas (bônus)
-│   ├── ft_printf/   # submódulo: github.com/Soppinha/ft_printf
-│   └── gnl/         # submódulo: github.com/Soppinha/GNL
-└── Makefile
+│   ├── ctype/       # character tests and conversions
+│   ├── mem/         # memory manipulation
+│   ├── str/         # string manipulation
+│   ├── conv/        # number <-> string conversions
+│   ├── put/         # writing to file descriptors
+│   ├── lst/         # linked lists
+│   ├── ft_printf/   # submodule: github.com/Soppinha/ft_printf
+│   └── gnl/         # submodule: github.com/Soppinha/GNL
+└── Makefile         # objects are built in obj/
 ```
 
-## 🧩 Funções
+### How the submodules are built
 
-### `ctype/`
-| Função | Descrição |
+ft_printf and get_next_line live in their own repositories and **do not depend on libft**. If they did, libft and the projects would depend on each other in a circle. The libft `Makefile`:
+
+1. runs `git submodule update --init` if a submodule folder is empty,
+2. calls `make` in `src/ft_printf` and `make bonus` in `src/gnl`. Each one is rebuilt only when its sources change,
+3. archives their objects together with libft's own objects into `libft.a`.
+
+`libft.h` declares only the public functions (`ft_printf`, `get_next_line`). Their helpers stay private to each submodule.
+
+### Functions
+
+#### `ctype/`
+| Function | Description |
 | :-- | :-- |
-| `ft_isalpha` | Verifica se é letra |
-| `ft_isdigit` | Verifica se é dígito |
-| `ft_isalnum` | Verifica se é letra ou dígito |
-| `ft_isascii` | Verifica se é ASCII |
-| `ft_isprint` | Verifica se é imprimível |
-| `ft_toupper` | Converte para maiúscula |
-| `ft_tolower` | Converte para minúscula |
+| `ft_isalpha` | Checks for a letter |
+| `ft_isdigit` | Checks for a digit |
+| `ft_isalnum` | Checks for a letter or digit |
+| `ft_isascii` | Checks for an ASCII character |
+| `ft_isprint` | Checks for a printable character |
+| `ft_toupper` / `ft_tolower` | Converts to upper / lower case |
 
-### `mem/`
-| Função | Descrição |
+#### `mem/`
+| Function | Description |
 | :-- | :-- |
-| `ft_memset` | Preenche memória com um byte |
-| `ft_bzero` | Zera uma área de memória |
-| `ft_memcpy` | Copia memória |
-| `ft_memmove` | Copia memória com sobreposição segura |
-| `ft_memchr` | Procura um byte na memória |
-| `ft_memcmp` | Compara duas áreas de memória |
-| `ft_calloc` | Aloca e zera memória |
+| `ft_memset` | Fills memory with a byte |
+| `ft_bzero` | Zeroes a memory area |
+| `ft_memcpy` | Copies memory |
+| `ft_memmove` | Copies memory, safe when the areas overlap |
+| `ft_memchr` | Finds a byte in memory |
+| `ft_memcmp` | Compares two memory areas |
+| `ft_calloc` | Allocates zeroed memory |
 
-### `str/`
-| Função | Descrição |
+#### `str/`
+| Function | Description |
 | :-- | :-- |
-| `ft_strlen` | Tamanho da string |
-| `ft_strlcpy` / `ft_strlcat` | Cópia / concatenação com limite |
-| `ft_strchr` / `ft_strrchr` | Primeira / última ocorrência de um caractere |
-| `ft_strcmp` / `ft_strncmp` | Comparação de strings |
-| `ft_strnstr` | Procura substring com limite |
-| `ft_strdup` | Duplica uma string |
-| `ft_substr` | Extrai substring |
-| `ft_strjoin` | Concatena duas strings (nova alocação) |
-| `ft_strjoin3` | Concatena três strings (nova alocação) |
-| `ft_strtrim` | Remove caracteres das pontas |
-| `ft_split` | Divide string por delimitador |
-| `ft_strmapi` / `ft_striteri` | Aplica função a cada caractere |
-| `ft_free_array` | Libera um array de strings |
-| `ft_gnl_trim` | Lê a próxima linha com `get_next_line` e remove o `\n` final |
+| `ft_strlen` | String length |
+| `ft_strlcpy` / `ft_strlcat` | Size-bounded copy / concatenation |
+| `ft_strchr` / `ft_strrchr` | First / last occurrence of a character |
+| `ft_strcmp` / `ft_strncmp` | String comparison |
+| `ft_strnstr` | Finds a substring within a length |
+| `ft_strdup` | Duplicates a string |
+| `ft_substr` | Extracts a substring |
+| `ft_strjoin` / `ft_strjoin3` | Joins two / three strings into a new one |
+| `ft_strtrim` | Trims a set of characters from both ends |
+| `ft_split` | Splits a string on a delimiter |
+| `ft_strmapi` / `ft_striteri` | Applies a function to each character |
+| `ft_free_array` | Frees a `NULL`-terminated array of strings |
+| `ft_gnl_trim` | Reads the next line with `get_next_line` and removes the trailing `\n` |
 
-### `conv/`
-| Função | Descrição |
+#### `conv/`
+| Function | Description |
 | :-- | :-- |
-| `ft_atoi` | String → `int` |
-| `ft_atol` | String → `long` |
-| `ft_itoa` | `int` → string |
+| `ft_atoi` / `ft_atol` | String to `int` / `long` |
+| `ft_itoa` | `int` to string |
 
-### `put/`
-| Função | Descrição |
+#### `put/`
+| Function | Description |
 | :-- | :-- |
-| `ft_putchar_fd` | Escreve um caractere |
-| `ft_putstr_fd` | Escreve uma string |
-| `ft_putendl_fd` | Escreve uma string + `\n` |
-| `ft_putnbr_fd` | Escreve um número |
+| `ft_putchar_fd` | Writes a character |
+| `ft_putstr_fd` | Writes a string |
+| `ft_putendl_fd` | Writes a string followed by `\n` |
+| `ft_putnbr_fd` | Writes an integer |
 
-### `lst/` (bônus)
-| Função | Descrição |
+#### `lst/`
+| Function | Description |
 | :-- | :-- |
-| `ft_lstnew` | Cria um nó |
-| `ft_lstadd_front` / `ft_lstadd_back` | Adiciona no início / fim |
-| `ft_lstsize` | Quantidade de nós |
-| `ft_lstlast` | Último nó |
-| `ft_lstdelone` / `ft_lstclear` | Remove um nó / a lista inteira |
-| `ft_lstiter` / `ft_lstmap` | Itera / mapeia a lista |
-| `ft_lst_to_array` | Converte a lista em array |
+| `ft_lstnew` | Creates a node |
+| `ft_lstadd_front` / `ft_lstadd_back` | Adds a node at the start / end |
+| `ft_lstsize` | Number of nodes |
+| `ft_lstlast` | Last node |
+| `ft_lstdelone` / `ft_lstclear` | Deletes one node / the whole list |
+| `ft_lstiter` / `ft_lstmap` | Iterates over / maps the list |
+| `ft_lst_to_array` | Converts the list into an array |
 
-### `src/ft_printf/` — ft_printf (submódulo)
-Reimplementação do `printf` com as conversões `%c`, `%s`, `%p`, `%d`, `%i`, `%u`, `%x`, `%X` e `%%` e as flags `-0.# +` com largura e precisão. Vive no seu próprio repositório, [ft_printf](https://github.com/Soppinha/ft_printf), e entra na `libft` como submódulo: o `make` compila o ft_printf e junta seus objetos em `libft.a`, então basta incluir `libft.h`.
+#### Submodules
+| Function | Description |
+| :-- | :-- |
+| `ft_printf` | Formatted output to stdout, returns the number of characters written |
+| `get_next_line` | Returns the next line of a file descriptor (with its `\n`), or `NULL` at the end |
 
-### `src/gnl/` — get_next_line (submódulo)
-Lê um arquivo linha por linha a partir de um file descriptor. Vive no seu próprio repositório, [GNL](https://github.com/Soppinha/GNL), e entra na `libft` como submódulo usando a **versão bônus**, que lê vários file descriptors ao mesmo tempo. O utilitário `ft_gnl_trim`, que devolve a linha sem o `\n` final, fica em `src/str/`.
+## Instructions
 
-## 🛠️ Compilação
-
-O ft_printf e o get_next_line são submódulos, então clone com:
+### Cloning
 
 ```bash
 git clone --recurse-submodules https://github.com/Soppinha/libft.git
-# ou, num clone já existente:
+# or, in an existing clone:
 git submodule update --init
 ```
 
-Se os submódulos não tiverem sido baixados, o `make` faz isso automaticamente.
+If the submodules were not cloned, `make` fetches them automatically.
+
+### Compilation
 
 ```bash
-make        # gera libft.a (incluindo ft_printf e get_next_line)
-make clean  # remove os objetos
-make fclean # remove objetos e libft.a
-make re     # recompila do zero
+make          # builds libft.a, including ft_printf and get_next_line
+make bonus    # same as make: the list functions are always included
+make clean    # removes the object files (libft and submodules)
+make fclean   # also removes libft.a
+make re       # rebuilds everything
 ```
 
-## 🚀 Uso
+The output uses the same format in all my projects, with one line per step:
+
+```
+[ft_printf]  archived   libftprintf.a
+[gnl]        archived   libgnl.a (bonus)
+[libft]      archived   libft.a
+```
+
+### Usage
 
 ```c
+#include <fcntl.h>
 #include "libft.h"
 
 int	main(void)
 {
-	ft_printf("Olá, %s!\n", "42");
+	int		fd;
+	char	*line;
+
+	fd = open("file.txt", O_RDONLY);
+	line = get_next_line(fd);
+	while (line)
+	{
+		ft_printf("%-10s| %s", "line:", line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
 	return (0);
 }
 ```
 
 ```bash
-cc -Wall -Wextra -Werror main.c -Iinclude -L. -lft
+cc -Wall -Wextra -Werror main.c -Iinclude -L. -lft -o example
 ```
 
----
+As a submodule of another project, add `-Ilibft/include -Llibft -lft` and call `make -C libft` before linking.
 
-<p align="center">Feito por <a href="https://github.com/Soppinha">svaladar</a> · 42 São Paulo</p>
+## Resources
+
+- `man 3 ctype`, `man 3 string`, `man 3 printf`, `man 2 read`
+- [Git submodules – Pro Git book](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+- [GNU Make manual](https://www.gnu.org/software/make/manual/make.html)
+- [Tripouille/libftTester](https://github.com/Tripouille/libftTester), a tester for this project
+
+### AI usage
+
+AI was used to draft this README from the existing source code. The implementation was written by the author.
