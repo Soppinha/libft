@@ -34,8 +34,9 @@ libft/
 │   ├── conv/     # conversões numéricas
 │   ├── put/      # escrita em file descriptors
 │   ├── lst/      # listas encadeadas (bônus)
-│   └── gnl/      # get_next_line
+│   └── gnl/      # ft_gnl_trim
 ├── ft_printf/    # submódulo: github.com/Soppinha/ft_printf
+├── gnl/          # submódulo: github.com/Soppinha/GNL
 └── Makefile
 ```
 
@@ -109,12 +110,12 @@ libft/
 ### `ft_printf/` — ft_printf (submódulo)
 Reimplementação do `printf` com as conversões `%c`, `%s`, `%p`, `%d`, `%i`, `%u`, `%x`, `%X` e `%%` e as flags `-0.# +` com largura e precisão. Vive no seu próprio repositório, [ft_printf](https://github.com/Soppinha/ft_printf), e entra na `libft` como submódulo: o `make` compila o ft_printf e junta seus objetos em `libft.a`, então basta incluir `libft.h`.
 
-### `gnl/` — get_next_line
-Lê um arquivo linha por linha a partir de um file descriptor. Inclui `ft_gnl_trim` como utilitário extra.
+### `gnl/` — get_next_line (submódulo)
+Lê um arquivo linha por linha a partir de um file descriptor. Vive no seu próprio repositório, [GNL](https://github.com/Soppinha/GNL), e entra na `libft` como submódulo usando a **versão bônus**, que lê vários file descriptors ao mesmo tempo. Em `src/gnl/` fica o `ft_gnl_trim`, um utilitário extra que devolve a linha sem o `\n` final.
 
 ## 🛠️ Compilação
 
-O ft_printf é um submódulo, então clone com:
+O ft_printf e o get_next_line são submódulos, então clone com:
 
 ```bash
 git clone --recurse-submodules https://github.com/Soppinha/libft.git
@@ -122,10 +123,10 @@ git clone --recurse-submodules https://github.com/Soppinha/libft.git
 git submodule update --init
 ```
 
-Se o submódulo não tiver sido baixado, o `make` faz isso automaticamente.
+Se os submódulos não tiverem sido baixados, o `make` faz isso automaticamente.
 
 ```bash
-make        # gera libft.a (incluindo o ft_printf)
+make        # gera libft.a (incluindo ft_printf e get_next_line)
 make clean  # remove os objetos
 make fclean # remove objetos e libft.a
 make re     # recompila do zero

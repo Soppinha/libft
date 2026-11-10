@@ -88,11 +88,6 @@ int		ft_printf(const char *format, ...);
 
 char	*get_next_line(int fd);
 char	*ft_gnl_trim(int fd);
-size_t	ft_gnl_strlen(const char *s);
-char	*ft_gnl_strchr(const char *s, int c);
-char	*ft_gnl_strjoin(char *s1, char *s2);
-char	*ft_extract_line(char *stash);
-char	*ft_update_stash(char *stash);
 
 long	ft_atol(const char *str);
 
