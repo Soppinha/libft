@@ -7,6 +7,10 @@ RM			=	rm -rf
 SRC_DIR		=	src
 OBJ_DIR		=	obj
 
+PRINTF_DIR	=	ft_printf
+PRINTF_LIB	=	$(PRINTF_DIR)/libftprintf.a
+PRINTF_DEPS	=	$(wildcard $(PRINTF_DIR)/src/*.c $(PRINTF_DIR)/include/*.h)
+
 CTYPE		=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 				ft_isprint.c ft_toupper.c ft_tolower.c
 
@@ -29,10 +33,6 @@ LST			=	ft_lstnew_bonus.c ft_lstadd_front_bonus.c \
 				ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c \
 				ft_lst_to_array.c
 
-PRINTF		=	ft_printf.c ft_parse_format.c ft_print_char.c \
-				ft_print_str.c ft_print_ptr.c ft_print_per.c \
-				ft_print_nbr.c ft_print_usg.c ft_print_hex.c
-
 GNL			=	get_next_line.c get_next_line_utils.c ft_gnl_trim.c
 
 SRCS		=	$(addprefix $(SRC_DIR)/ctype/, $(CTYPE)) \
@@ -41,16 +41,20 @@ SRCS		=	$(addprefix $(SRC_DIR)/ctype/, $(CTYPE)) \
 				$(addprefix $(SRC_DIR)/conv/, $(CONV)) \
 				$(addprefix $(SRC_DIR)/put/, $(PUT)) \
 				$(addprefix $(SRC_DIR)/lst/, $(LST)) \
-				$(addprefix $(SRC_DIR)/printf/, $(PRINTF)) \
 				$(addprefix $(SRC_DIR)/gnl/, $(GNL))
 
 OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS)
-	@ar rcs $(NAME) $(OBJS)
+$(NAME):	$(OBJS) $(PRINTF_LIB)
+	@ar rcs $(NAME) $(OBJS) $(PRINTF_DIR)/obj/*.o
 	@printf "\033[1;34mlibft: done\033[0m\n"
+
+$(PRINTF_LIB):	$(PRINTF_DEPS)
+	@if [ ! -f $(PRINTF_DIR)/Makefile ]; then \
+		git submodule update --init $(PRINTF_DIR); fi
+	@$(MAKE) -s -C $(PRINTF_DIR)
 
 bonus:		all
 
@@ -61,9 +65,11 @@ $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c include/libft.h
 
 clean:
 	@$(RM) $(OBJ_DIR)
+	@if [ -f $(PRINTF_DIR)/Makefile ]; then $(MAKE) -s -C $(PRINTF_DIR) clean; fi
 
 fclean:		clean
 	@$(RM) $(NAME)
+	@if [ -f $(PRINTF_DIR)/Makefile ]; then $(MAKE) -s -C $(PRINTF_DIR) fclean; fi
 
 re:			fclean all
 

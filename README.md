@@ -34,8 +34,8 @@ libft/
 │   ├── conv/     # conversões numéricas
 │   ├── put/      # escrita em file descriptors
 │   ├── lst/      # listas encadeadas (bônus)
-│   ├── printf/   # ft_printf
 │   └── gnl/      # get_next_line
+├── ft_printf/    # submódulo: github.com/Soppinha/ft_printf
 └── Makefile
 ```
 
@@ -106,16 +106,26 @@ libft/
 | `ft_lstiter` / `ft_lstmap` | Itera / mapeia a lista |
 | `ft_lst_to_array` | Converte a lista em array |
 
-### `printf/` — ft_printf
-Reimplementação do `printf` com suporte às conversões `%c`, `%s`, `%p`, `%d`, `%i`, `%u`, `%x`, `%X` e `%%`.
+### `ft_printf/` — ft_printf (submódulo)
+Reimplementação do `printf` com as conversões `%c`, `%s`, `%p`, `%d`, `%i`, `%u`, `%x`, `%X` e `%%` e as flags `-0.# +` com largura e precisão. Vive no seu próprio repositório, [ft_printf](https://github.com/Soppinha/ft_printf), e entra na `libft` como submódulo: o `make` compila o ft_printf e junta seus objetos em `libft.a`, então basta incluir `libft.h`.
 
 ### `gnl/` — get_next_line
 Lê um arquivo linha por linha a partir de um file descriptor. Inclui `ft_gnl_trim` como utilitário extra.
 
 ## 🛠️ Compilação
 
+O ft_printf é um submódulo, então clone com:
+
 ```bash
-make        # gera libft.a
+git clone --recurse-submodules https://github.com/Soppinha/libft.git
+# ou, num clone já existente:
+git submodule update --init
+```
+
+Se o submódulo não tiver sido baixado, o `make` faz isso automaticamente.
+
+```bash
+make        # gera libft.a (incluindo o ft_printf)
 make clean  # remove os objetos
 make fclean # remove objetos e libft.a
 make re     # recompila do zero

@@ -85,14 +85,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
 int		ft_printf(const char *format, ...);
-int		ft_parse_format(const char *format, va_list args);
-int		ft_print_char(int c);
-int		ft_print_str(char *str);
-int		ft_print_ptr(unsigned long ptr);
-int		ft_print_nbr(int n);
-int		ft_print_usg(unsigned int n);
-int		ft_print_hex(unsigned int n, int uppercase);
-int		ft_print_per(void);
 
 char	*get_next_line(int fd);
 char	*ft_gnl_trim(int fd);
